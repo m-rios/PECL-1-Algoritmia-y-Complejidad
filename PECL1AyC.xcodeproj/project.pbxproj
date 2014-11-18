@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC0DA6241A1BDFE500D1CD72 /* concierto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC0DA6221A1BDFE500D1CD72 /* concierto.cpp */; };
 		AC324DB81A1BC4BC00C6DD60 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC324DB71A1BC4BC00C6DD60 /* main.cpp */; };
+		AC324DC01A1BC88900C6DD60 /* file_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC324DBE1A1BC88900C6DD60 /* file_parser.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +25,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AC0DA6211A1BDC2600D1CD72 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
+		AC0DA6221A1BDFE500D1CD72 /* concierto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = concierto.cpp; sourceTree = "<group>"; };
+		AC0DA6231A1BDFE500D1CD72 /* concierto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = concierto.h; sourceTree = "<group>"; };
 		AC324DB41A1BC4BC00C6DD60 /* PECL1AyC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PECL1AyC; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC324DB71A1BC4BC00C6DD60 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		AC324DBE1A1BC88900C6DD60 /* file_parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_parser.cpp; sourceTree = "<group>"; };
+		AC324DBF1A1BC88900C6DD60 /* file_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_parser.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +65,11 @@
 			isa = PBXGroup;
 			children = (
 				AC324DB71A1BC4BC00C6DD60 /* main.cpp */,
+				AC324DBE1A1BC88900C6DD60 /* file_parser.cpp */,
+				AC324DBF1A1BC88900C6DD60 /* file_parser.h */,
+				AC0DA6211A1BDC2600D1CD72 /* test.txt */,
+				AC0DA6221A1BDFE500D1CD72 /* concierto.cpp */,
+				AC0DA6231A1BDFE500D1CD72 /* concierto.h */,
 			);
 			path = PECL1AyC;
 			sourceTree = "<group>";
@@ -118,7 +130,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC324DC01A1BC88900C6DD60 /* file_parser.cpp in Sources */,
 				AC324DB81A1BC4BC00C6DD60 /* main.cpp in Sources */,
+				AC0DA6241A1BDFE500D1CD72 /* concierto.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +246,7 @@
 				AC324DBD1A1BC4BC00C6DD60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
