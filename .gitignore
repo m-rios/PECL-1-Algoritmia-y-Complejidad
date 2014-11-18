@@ -15,7 +15,6 @@ xcuserdata
 *.moved-aside
 DerivedData
 *.xcuserstate
-*.xcscheme
 
 
 ### C++ ###
