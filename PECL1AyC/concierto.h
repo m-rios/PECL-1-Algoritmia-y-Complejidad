@@ -18,7 +18,7 @@ using namespace std;
 class Concierto {
 private:
     int N,P,Q;
-    int F[MAX_F], G[MAX_F];
+    int *F, *G;
     
 public:
     Concierto(int N, int P, int Q, int *F, int *G);

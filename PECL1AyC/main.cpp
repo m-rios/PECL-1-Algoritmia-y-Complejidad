@@ -25,6 +25,7 @@ int main(int argc, const char * argv[]) {
     Parser file = Parser(path);
     
     Concierto concierto = file.get_concierto();
+    concierto.asignar_Lima();
     concierto.print();
     return 0;
 }
