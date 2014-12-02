@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 #define MAX_F 10
@@ -19,11 +20,13 @@ class Concierto {
 private:
     int N,P,Q;
     int *F, *G;
+    int **B;
     
 public:
     Concierto(int N, int P, int Q, int *F, int *G);
-    int asignar_Lima();
+    int* asignar_Lima();
     void print();
+    int find(int*a, int ini, int fin, int key);
     ~Concierto();
 };
 

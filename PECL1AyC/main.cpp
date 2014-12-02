@@ -25,7 +25,12 @@ int main(int argc, const char * argv[]) {
     Parser file = Parser(path);
     
     Concierto concierto = file.get_concierto();
-    concierto.asignar_Lima();
-    concierto.print();
+    int * sol = concierto.asignar_Lima();
+    cout << "Filas: ";
+    int P = sizeof(sol) / sizeof(int);
+    for (int i = 0; i < P; i++) {
+        cout << "[" << sol[i] << "]";
+    }
+    cout << endl;
     return 0;
 }
