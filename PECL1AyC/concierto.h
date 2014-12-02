@@ -21,6 +21,8 @@ private:
     int N,P,Q;
     int *F, *G;
     int **B;
+    void custom_sort(int * master, int * slave, int ini, int fin);
+    int* merge(int * a, int inia, int fina, int inib,  int finb);
     
 public:
     Concierto(int N, int P, int Q, int *F, int *G);

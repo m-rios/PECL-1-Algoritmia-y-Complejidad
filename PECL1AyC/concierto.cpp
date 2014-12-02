@@ -60,7 +60,7 @@ int* Concierto::asignar_Lima()
 }
 
 int Concierto::find(int* a, int ini, int fin, int key)
-{
+{ //binary search
     if (ini == fin) {
         if (a[ini] == key) {
             return ini;
@@ -74,6 +74,27 @@ int Concierto::find(int* a, int ini, int fin, int key)
         find(a,mid+1,fin,key);
     }
     return -2; // to avoid compiler error, theoretically unnecesary
+}
+
+void Concierto::custom_sort(int * master, int * slave, int ini, int fin)
+{ //merge sort on master & slave, taking master's value as reference
+    if (ini != fin) {
+        int mid = (ini + fin) / 2;
+        custom_sort(master, slave, ini, mid);
+        custom_sort(master, slave, mid+1, fin);
+        master = merge(master, ini, mid, mid+1, fin);
+        slave = merge(slave, ini, mid, mid+1, fin);
+    }
+}
+
+int* Concierto::merge(int * a, int inia, int fina, int inib,  int finb)
+{
+    int n = (fina - inia) + (finb - inib);
+    int* sol = (int*) malloc(n*sizeof(int));
+
+    //merge logic
+    
+    return n;
 }
 
 void Concierto::print()

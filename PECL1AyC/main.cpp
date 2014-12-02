@@ -26,6 +26,8 @@ int main(int argc, const char * argv[]) {
     
     Concierto concierto = file.get_concierto();
     int * sol = concierto.asignar_Lima();
+    concierto.print();
+    cout<< ";;;;;;;;;;;;;"<<endl;
     cout << "Filas: ";
     int P = sizeof(sol) / sizeof(int);
     for (int i = 0; i < P; i++) {
