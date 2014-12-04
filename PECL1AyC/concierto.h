@@ -22,13 +22,14 @@ private:
     int *F, *G;
     int **B;
     void custom_sort(int * master, int * slave, int ini, int fin);
-    int* merge(int * a, int inia, int fina, int inib,  int finb);
     
 public:
+    int* merge(int * a, int inia, int fina, int inib,  int finb);
     Concierto(int N, int P, int Q, int *F, int *G);
     int* asignar_Lima();
     void print();
     int find(int*a, int ini, int fin, int key);
+    void sort_test(int* master, int* slave);
     ~Concierto();
 };
 

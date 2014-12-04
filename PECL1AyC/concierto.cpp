@@ -29,34 +29,36 @@ Concierto::~Concierto()
 int* Concierto::asignar_Lima()
 {
     int complains = 0;
-    int* sol = (int*) malloc(10*sizeof(int));
-    sol = F;
-    int* first(&sol[0]);
+    int* filas = (int*) malloc(P*sizeof(int));
+    int * grupos = (int*) malloc(Q*sizeof(int));
+    filas = F;
+    grupos = G;
+    int* first(&filas[0]);
     int* last(first + P);
     int pos;
     for (int i = 0; i < Q; i++) {
         sort(first, last, greater<int>()); //nlog(n)
-        pos = find(sol, 0, P, G[i]); //lg(n)
+        pos = find(filas, 0, P, G[i]); //lg(n)
         if (pos > -1) { //exact empty space
-            sol[pos] = 0;
+            filas[pos] = 0;
             continue;
         }
-        if (sol[0] > G[i]) {
-            sol[0] -= G[i];
+        if (filas[0] > G[i]) {
+            filas[0] -= G[i];
             continue;
         }
         complains += G[i];
         int g_size = G[i];
         int c = 0;
-        while (g_size > sol[c]) {
-            g_size -= sol[c];
-            sol[c] = 0;
+        while (g_size > filas[c]) {
+            g_size -= filas[c];
+            filas[c] = 0;
             c++;
         }
-        sol[c] -= g_size;
+        filas[c] -= g_size;
     }
     cout << endl;
-    return sol;
+    return filas;
 }
 
 int Concierto::find(int* a, int ini, int fin, int key)
@@ -91,10 +93,50 @@ int* Concierto::merge(int * a, int inia, int fina, int inib,  int finb)
 {
     int n = (fina - inia) + (finb - inib);
     int* sol = (int*) malloc(n*sizeof(int));
-
-    //merge logic
     
-    return n;
+    int c = 0;
+    int i = inia;
+    int j = inib;
+    
+    while ((i <= fina) && (j <= finb)) {
+        if (a[i] >= a[j]) {
+            sol[c] = a[i];
+            i++;
+        } else {
+            sol[c] = a[j];
+            j++;
+        }
+        c++;
+    }
+    
+    if (i < fina) {
+        while (i <= fina) {
+            sol[c] = a[i];
+            i++;
+            c++;
+        }
+    }else if (j < finb) {
+        while (j <= finb) {
+            sol[c] = a[j];
+            j++;
+            c++;
+        }
+    }
+    
+    /*
+    cout << "sol" << endl;
+    
+    for (int i = 0; i < n ; i++) {
+        cout << sol[i];
+    }
+    cout << endl;
+    */
+    return sol;
+}
+
+void Concierto::sort_test(int * master, int * slave)
+{
+    custom_sort(master, slave, 0, 9);
 }
 
 void Concierto::print()
