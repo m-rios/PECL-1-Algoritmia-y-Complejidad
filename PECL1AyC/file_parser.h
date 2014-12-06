@@ -22,7 +22,8 @@ class Parser {
 private:
     char* path;
     int N,P,Q;
-    int F[MAX_F], G[MAX_F];
+    vector<int> F;
+    vector<int> G;
     
 public:
     Parser(const char* path);

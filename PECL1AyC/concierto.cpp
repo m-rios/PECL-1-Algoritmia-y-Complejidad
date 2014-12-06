@@ -8,17 +8,13 @@
 
 #include "concierto.h"
 
-Concierto::Concierto(int N, int P, int Q, int *F, int *G)
+Concierto::Concierto(int N, int P, int Q, vector<int> F, vector<int> G)
 {
     this->N = N; // n personas
     this->P = P; //n filas
     this->Q = Q; //n grupos
     this->F = F; // array filas
     this->G = G; // array grupos
-    B = (int**) malloc(P*sizeof(int*));
-    for (int i = 0; i < P; i++) {
-        B[i] = (int*) malloc(F[i]*sizeof(int));
-    }
 }
 
 Concierto::~Concierto()
@@ -26,42 +22,55 @@ Concierto::~Concierto()
     
 }
 
-int* Concierto::asignar_Lima()
+vector<int> Concierto::asignar_Lima()
 {
     int complains = 0;
-    int* filas = (int*) malloc(P*sizeof(int));
-    int * grupos = (int*) malloc(Q*sizeof(int));
-    filas = F;
-    grupos = G;
+    vector<int> filas = F;
+    vector<int> grupos = G;;
     int* first(&filas[0]);
     int* last(first + P);
+    int c = 0;
     int pos;
-    for (int i = 0; i < Q; i++) {
-        sort(first, last, greater<int>()); //nlog(n)
-        pos = find(filas, 0, P, G[i]); //lg(n)
-        if (pos > -1) { //exact empty space
-            filas[pos] = 0;
-            continue;
+    while (c < Q) {
+        //look for empty space of groups size
+        pos = find(filas, 0, P, grupos[c]);
+        if (pos > -1) { //space found
+            filas[pos] -=grupos[c];
+        } else {
+            int max = get_max(filas);
+            if (grupos[c] < filas[max]) {
+                filas[max] -= grupos[c];
+            } else {
+                max = get_max(filas);
+                while (grupos[c] > filas[max]) {
+                    grupos[c] -= filas[max];
+                    filas[max] = 0;
+                    get_max(filas);
+                    c++;
+                }
+                filas[max] -= grupos[c];
+            }
         }
-        if (filas[0] > G[i]) {
-            filas[0] -= G[i];
-            continue;
-        }
-        complains += G[i];
-        int g_size = G[i];
-        int c = 0;
-        while (g_size > filas[c]) {
-            g_size -= filas[c];
-            filas[c] = 0;
-            c++;
-        }
-        filas[c] -= g_size;
+        c++;
     }
     cout << endl;
     return filas;
 }
 
-int Concierto::find(int* a, int ini, int fin, int key)
+int Concierto::get_max(vector<int> n)
+{
+    //O(n)
+    int max = 0;
+    int size = (int) sizeof(n) / (int) sizeof(int);
+    for (int i = 0; i < size; i++) {
+        if (max < n[i]) {
+            max = n[i];
+        }
+    }
+    return max;
+}
+
+int Concierto::find(vector<int> a, int ini, int fin, int key)
 { //binary search
     if (ini == fin) {
         if (a[ini] == key) {

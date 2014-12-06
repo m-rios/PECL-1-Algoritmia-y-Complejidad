@@ -12,6 +12,9 @@
 #include <stdio.h>
 #include <iostream>
 #include <algorithm>
+#include <vector>
+
+
 using namespace std;
 
 #define MAX_F 10
@@ -19,16 +22,17 @@ using namespace std;
 class Concierto {
 private:
     int N,P,Q;
-    int *F, *G;
-    int **B;
+    vector<int> F, G;
+    vector<vector<int>> B;
     void custom_sort(int * master, int * slave, int ini, int fin);
+    int get_max(vector<int> n);
     
 public:
     int* merge(int * a, int inia, int fina, int inib,  int finb);
-    Concierto(int N, int P, int Q, int *F, int *G);
-    int* asignar_Lima();
+    Concierto(int N, int P, int Q, vector<int> F, vector<int> G);
+    vector<int> asignar_Lima();
     void print();
-    int find(int*a, int ini, int fin, int key);
+    int find(vector<int>, int ini, int fin, int key);
     void sort_test(int* master, int* slave);
     ~Concierto();
 };
