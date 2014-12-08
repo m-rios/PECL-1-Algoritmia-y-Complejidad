@@ -26,7 +26,46 @@ Concierto::~Concierto()
     
 }
 
-vector<int> Concierto::asignar_Lima()
+vector<int> Concierto::asignar_Lima_B()
+{
+    vector<int> filas = F;
+    vector<int> grupos = G;;
+    int c = 0;
+    int pos;
+    while (c < Q) {
+        //look for empty space of groups size
+        pos = find(filas.begin(), filas.end(), grupos[c]) - filas.begin();
+        if (pos < filas.size()) { //space found
+            filas[pos] -=grupos[c];
+            fill(pos, grupos[c], c);
+        } else {
+            int max = get_max(filas);
+            if (grupos[c] < filas[max]) {
+                filas[max] -= grupos[c];
+                fill(max, grupos[c], c);
+            } else {
+                complains+=grupos[c];
+                int min = get_min(filas);
+                while (grupos[c] > filas[min]) {
+                    int watch = grupos[c];
+                    grupos[c] -= filas[min];
+                    watch = grupos[c];
+                    fill(min, filas[min], c);
+                    filas[min] = 0;
+                    min = get_min(filas);
+                }
+                max = get_max(filas);
+                fill(max, grupos[c], c);
+                filas[max] -= grupos[c];
+            }
+        }
+        c++;
+    }
+    cout << endl;
+    return filas;
+}
+
+vector<int> Concierto::asignar_Lima_A()
 {
     vector<int> filas = F;
     vector<int> grupos = G;;
@@ -62,6 +101,7 @@ vector<int> Concierto::asignar_Lima()
     cout << endl;
     return filas;
 }
+
 
 int Concierto::get_complains()
 {
@@ -102,6 +142,22 @@ int Concierto::get_max(vector<int> n)
     }
     return pos;
 }
+
+int Concierto::get_min(vector<int> n) {
+    int min = INT16_MAX;
+    int pos = 0;
+    for (int i = 0; i < n.size(); i++) {
+        if (n[i] == 0) {
+            continue;
+        }
+        if (min > n[i]) {
+            min = n[i];
+            pos = i;
+        }
+    }
+    return pos;
+}
+
 /*
 int Concierto::find(vector<int> a, int ini, int fin, int key)
 { //binary search

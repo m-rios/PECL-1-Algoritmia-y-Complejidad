@@ -58,27 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PECL1AyC/concierto.cpp"
-            timestampString = "439575193.978584"
+            timestampString = "439758753.778681"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "Concierto::asignar_Lima()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PECL1AyC/concierto.cpp"
-            timestampString = "439750470.942785"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "Concierto::fill(int nfila, int npersonas, int id)"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PECL1AyC/concierto.cpp"
-            timestampString = "439750222.771006"
+            timestampString = "439753570.043644"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
             endingLineNumber = "47"
-            landmarkName = "Concierto::asignar_Lima()"
+            landmarkName = "Concierto::asignar_Lima_B()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

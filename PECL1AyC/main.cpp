@@ -26,7 +26,7 @@ int main(int argc, const char * argv[]) {
     
     Concierto concierto = file.get_concierto();
 
-    vector<int> sol = concierto.asignar_Lima();
+    vector<int> sol = concierto.asignar_Lima_B();
     for (int i = 0; i < sol.size(); i++) {
         cout << "[" << sol[i] << "]";
     }
