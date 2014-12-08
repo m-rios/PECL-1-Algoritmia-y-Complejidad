@@ -45,13 +45,15 @@ vector<int> Concierto::asignar_Lima()
                 fill(max, grupos[c], c);
             } else {
                 complains+=grupos[c];
-                max = get_max(filas);
                 while (grupos[c] > filas[max]) {
+                    int watch = grupos[c];
                     grupos[c] -= filas[max];
+                    watch = grupos[c];
+                    fill(max, filas[max], c);
                     filas[max] = 0;
-                    get_max(filas);
-                    c++;
+                    max = get_max(filas);
                 }
+                fill(max, grupos[c], c);
                 filas[max] -= grupos[c];
             }
         }
@@ -92,8 +94,7 @@ int Concierto::get_max(vector<int> n)
     //O(n)
     int max = 0;
     int pos = 0;
-    int size = (int) sizeof(n) / (int) sizeof(int);
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < n.size(); i++) {
         if (max < n[i]) {
             max = n[i];
             pos = i;
