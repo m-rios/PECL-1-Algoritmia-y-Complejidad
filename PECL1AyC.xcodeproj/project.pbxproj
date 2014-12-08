@@ -10,6 +10,7 @@
 		AC0DA6241A1BDFE500D1CD72 /* concierto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC0DA6221A1BDFE500D1CD72 /* concierto.cpp */; };
 		AC324DB81A1BC4BC00C6DD60 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC324DB71A1BC4BC00C6DD60 /* main.cpp */; };
 		AC324DC01A1BC88900C6DD60 /* file_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC324DBE1A1BC88900C6DD60 /* file_parser.cpp */; };
+		AC92A0201A3363DD006F7D68 /* row.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC92A01E1A3363DD006F7D68 /* row.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +33,8 @@
 		AC324DB71A1BC4BC00C6DD60 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AC324DBE1A1BC88900C6DD60 /* file_parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_parser.cpp; sourceTree = "<group>"; };
 		AC324DBF1A1BC88900C6DD60 /* file_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_parser.h; sourceTree = "<group>"; };
+		AC92A01E1A3363DD006F7D68 /* row.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = row.cpp; sourceTree = "<group>"; };
+		AC92A01F1A3363DD006F7D68 /* row.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = row.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +73,8 @@
 				AC0DA6211A1BDC2600D1CD72 /* test.txt */,
 				AC0DA6221A1BDFE500D1CD72 /* concierto.cpp */,
 				AC0DA6231A1BDFE500D1CD72 /* concierto.h */,
+				AC92A01E1A3363DD006F7D68 /* row.cpp */,
+				AC92A01F1A3363DD006F7D68 /* row.h */,
 			);
 			path = PECL1AyC;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC92A0201A3363DD006F7D68 /* row.cpp in Sources */,
 				AC324DC01A1BC88900C6DD60 /* file_parser.cpp in Sources */,
 				AC324DB81A1BC4BC00C6DD60 /* main.cpp in Sources */,
 				AC0DA6241A1BDFE500D1CD72 /* concierto.cpp in Sources */,

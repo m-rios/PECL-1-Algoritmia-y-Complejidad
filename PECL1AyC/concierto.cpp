@@ -15,6 +15,10 @@ Concierto::Concierto(int N, int P, int Q, vector<int> F, vector<int> G)
     this->Q = Q; //n grupos
     this->F = F; // array filas
     this->G = G; // array grupos
+    complains = 0;
+    for (int i = 0; i < P; i++) {
+        B.push_back(Row(F[i]));
+    }
 }
 
 Concierto::~Concierto()
@@ -24,23 +28,23 @@ Concierto::~Concierto()
 
 vector<int> Concierto::asignar_Lima()
 {
-    int complains = 0;
     vector<int> filas = F;
     vector<int> grupos = G;;
-    int* first(&filas[0]);
-    int* last(first + P);
     int c = 0;
     int pos;
     while (c < Q) {
         //look for empty space of groups size
-        pos = find(filas, 0, P, grupos[c]);
-        if (pos > -1) { //space found
+        pos = find(filas.begin(), filas.end(), grupos[c]) - filas.begin();
+        if (pos < filas.size()) { //space found
             filas[pos] -=grupos[c];
+            fill(pos, grupos[c], c);
         } else {
             int max = get_max(filas);
             if (grupos[c] < filas[max]) {
                 filas[max] -= grupos[c];
+                fill(max, grupos[c], c);
             } else {
+                complains+=grupos[c];
                 max = get_max(filas);
                 while (grupos[c] > filas[max]) {
                     grupos[c] -= filas[max];
@@ -57,19 +61,47 @@ vector<int> Concierto::asignar_Lima()
     return filas;
 }
 
+int Concierto::get_complains()
+{
+    return complains;
+}
+
+void Concierto::printButacas()
+{
+    cout << "Butacas:" << endl;;
+    for (int i = 0; i < B.size(); i++) {
+        for (int j = 0; j < B[i].chairs.size(); j++) {
+            cout << "[" << B[i].chairs[j] << "]";
+        }
+        cout << endl;
+    }
+}
+
+bool Concierto::fill(int nfila, int npersonas, int id)
+{
+    int free = B[nfila].free;
+    for (int i = free; i < free+npersonas; i++) {
+        B[nfila].chairs[i] = id+1;
+    }
+    B[nfila].free = free+npersonas;
+    return true;
+}
+
 int Concierto::get_max(vector<int> n)
 {
     //O(n)
     int max = 0;
+    int pos = 0;
     int size = (int) sizeof(n) / (int) sizeof(int);
     for (int i = 0; i < size; i++) {
         if (max < n[i]) {
             max = n[i];
+            pos = i;
         }
     }
-    return max;
+    return pos;
 }
-
+/*
 int Concierto::find(vector<int> a, int ini, int fin, int key)
 { //binary search
     if (ini == fin) {
@@ -86,7 +118,7 @@ int Concierto::find(vector<int> a, int ini, int fin, int key)
     }
     return -2; // to avoid compiler error, theoretically unnecesary
 }
-
+*/
 void Concierto::custom_sort(int * master, int * slave, int ini, int fin)
 { //merge sort on master & slave, taking master's value as reference
     if (ini != fin) {
@@ -156,6 +188,11 @@ void Concierto::print()
     cout << "Filas: ";
     for (int i = 0; i < P; i++) {
         cout << "[" << F[i] << "]";
+    }
+    cout << endl;
+    cout << "Grupos: ";
+    for (int i = 0; i < Q; i++) {
+        cout << "[" << G[i] << "]";
     }
     cout << endl;
 }

@@ -13,6 +13,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include "row.h"
 
 
 using namespace std;
@@ -22,18 +23,25 @@ using namespace std;
 class Concierto {
 private:
     int N,P,Q;
+    int complains;
     vector<int> F, G;
-    vector<vector<int>> B;
+    vector<Row> B;
+    
+    
+    
     void custom_sort(int * master, int * slave, int ini, int fin);
     int get_max(vector<int> n);
+    bool fill(int nfila, int npersonas, int id);
     
 public:
     int* merge(int * a, int inia, int fina, int inib,  int finb);
     Concierto(int N, int P, int Q, vector<int> F, vector<int> G);
     vector<int> asignar_Lima();
     void print();
-    int find(vector<int>, int ini, int fin, int key);
+    //int find(vector<int>, int ini, int fin, int key);
     void sort_test(int* master, int* slave);
+    int get_complains();
+    void printButacas();
     ~Concierto();
 };
 

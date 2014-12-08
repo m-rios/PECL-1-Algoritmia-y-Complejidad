@@ -11,31 +11,23 @@
 Parser::Parser(const char* path)
 {
     ifstream file (path);
+    vector<string> content;
     string input ("\0");
     if (file.is_open()) {
         string tmp ("\0");
-        //valor de N es lo primero que encontramos
-        getline(file, tmp);
-        N = stoi(tmp);
-        //capturar '// Filas'
-        getline(file, tmp);
-        //tomar tamaño P e iterar sobre F
-        getline(file, tmp);
-        P = stoi(tmp);
-        getline(file,tmp);
-        int i = 0;
-        while (tmp != "// Grupos") {
-            F[i] = stoi(tmp);
-            i++;
-            getline(file,tmp);
-        }
-        // ya hemos leido '// Grupos'
-        getline(file,tmp);
-        Q = stoi(tmp);
-        i = 0;
         while (getline(file,tmp)) {
-            G[i] = stoi(tmp);
-            i ++;
+            content.push_back(tmp);
+        }
+        N = stoi(content[0]);
+        int posf = find(content.begin(), content.end(), "// Filas") - content.begin();
+        P = stoi(content[posf+1]);
+        int posg = find(content.begin() + posf, content.end(), "// Grupos") - content.begin();
+        Q = stoi(content[posg + 1]);
+        for (int i = posf + 2; i < posg; i++) {
+            F.push_back(stoi(content[i]));
+        }
+        for (int i = posg + 2; i < content.size(); i++) {
+            G.push_back(stoi(content[i]));
         }
     }
     else

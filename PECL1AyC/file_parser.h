@@ -14,6 +14,7 @@
 #include <fstream>
 #include <string>
 #include "concierto.h"
+#include <vector>
 using namespace std;
 
 #define MAX_F 10
