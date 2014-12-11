@@ -104,23 +104,6 @@ int Concierto::asignar_Lima_Verbose(vector<int> filas, vector<int> grupos)
     return complains;
 }
 
-void print_status(bool found, int row, int grp_size, int nfree, bool fragmented)
-{
-    if (found) {
-        cout << "Hueco encontrado!,";
-    }else{
-        cout << "No hay hueco exacto,";
-    }
-    cout << "sentando " << grp_size << "personas ";
-    if (!fragmented) {
-        cout << "en la fila " << row << "con " << nfree << "butacas libres ";
-    }else{
-        
-    }
-
-    
-}
-
 int Concierto::asignar_Lima(bool verbose)
 {
     if (verbose) {
@@ -184,36 +167,4 @@ int Concierto::get_min(vector<int> n) {
         }
     }
     return pos;
-}
-
-int Concierto::get_min_usable(vector<int> n, int len) {
-    int min = INT16_MAX;
-    int pos = 0;
-    for (int i = 0; i < n.size(); i++) {
-        if ((n[i] == 0) || (n[i] < len)) {
-            continue;
-        }
-        if (min > n[i]) {
-            min = n[i];
-            pos = i;
-        }
-    }
-    return pos;
-}
-
-void Concierto::print()
-{
-    cout << "N: "<< N << endl;
-    cout << "P: " << P<< endl;
-    cout << "Q: " << Q<< endl;
-    cout << "Filas: ";
-    for (int i = 0; i < P; i++) {
-        cout << "[" << F[i] << "]";
-    }
-    cout << endl;
-    cout << "Grupos: ";
-    for (int i = 0; i < Q; i++) {
-        cout << "[" << G[i] << "]";
-    }
-    cout << endl;
 }
