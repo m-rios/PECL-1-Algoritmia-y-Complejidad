@@ -26,30 +26,25 @@ Concierto::~Concierto()
     
 }
 
-vector<int> Concierto::asignar_Lima_B()
+int Concierto::asignar_Lima(vector<int> filas, vector<int> grupos)
 {
-    vector<int> filas = F;
-    vector<int> grupos = G;;
-    int c = 0;
     int pos;
-    while (c < Q) {
-        //look for empty space of groups size
+    for (int c = 0; c < Q; c++) {
+        //buscar hueco del tamaño del grupo
         pos = find(filas.begin(), filas.end(), grupos[c]) - filas.begin();
-        if (pos < filas.size()) { //space found
+        if (pos < filas.size()) {           //hueco encontrado
             filas[pos] -=grupos[c];
             fill(pos, grupos[c], c);
-        } else {
+        } else {                            //hueco no encontrado
             int max = get_max(filas);
-            if (grupos[c] < filas[max]) {
+            if (grupos[c] < filas[max]) {   //grupo cabe en fila
                 filas[max] -= grupos[c];
                 fill(max, grupos[c], c);
-            } else {
+            } else {                        //no cabe, hay q fragmentar
                 complains+=grupos[c];
                 int min = get_min(filas);
                 while (grupos[c] > filas[min]) {
-                    int watch = grupos[c];
                     grupos[c] -= filas[min];
-                    watch = grupos[c];
                     fill(min, filas[min], c);
                     filas[min] = 0;
                     min = get_min(filas);
@@ -59,84 +54,13 @@ vector<int> Concierto::asignar_Lima_B()
                 filas[max] -= grupos[c];
             }
         }
-        c++;
     }
-    cout << endl;
-    return filas;
+    return complains;
 }
 
-vector<int> Concierto::asignar_Lima_A()
+int Concierto::asignar_Lima()
 {
-    vector<int> filas = F;
-    vector<int> grupos = G;;
-    int c = 0;
-    int pos;
-    while (c < Q) {
-        //look for empty space of groups size
-        pos = find(filas.begin(), filas.end(), grupos[c]) - filas.begin();
-        if (pos < filas.size()) { //space found
-            filas[pos] -=grupos[c];
-            fill(pos, grupos[c], c);
-        } else {
-            int max = get_max(filas);
-            if (grupos[c] < filas[max]) {
-                filas[max] -= grupos[c];
-                fill(max, grupos[c], c);
-            } else {
-                complains+=grupos[c];
-                while (grupos[c] > filas[max]) {
-                    int watch = grupos[c];
-                    grupos[c] -= filas[max];
-                    watch = grupos[c];
-                    fill(max, filas[max], c);
-                    filas[max] = 0;
-                    max = get_max(filas);
-                }
-                fill(max, grupos[c], c);
-                filas[max] -= grupos[c];
-            }
-        }
-        c++;
-    }
-    cout << endl;
-    return filas;
-}
-
-vector<int> Concierto::asignar_Lima_C()
-{
-    vector<int> filas = F;
-    vector<int> grupos = G;;
-    int c = 0;
-    int pos;
-    while (c < Q) {
-        //look for empty space of groups size
-        pos = find(filas.begin(), filas.end(), grupos[c]) - filas.begin();
-        if (pos < filas.size()) { //space found
-            filas[pos] -=grupos[c];
-            fill(pos, grupos[c], c);
-        } else {
-            int min = get_min_usable(filas, grupos[c]);
-            if (grupos[c] < filas[min]) {
-                filas[min] -= grupos[c];
-                fill(min, grupos[c], c);
-            } else {
-                complains+=grupos[c];
-                while (grupos[c] > filas[min]) {
-                    int watch = grupos[c];
-                    grupos[c] -= filas[min];
-                    watch = grupos[c];
-                    fill(min, filas[min], c);
-                    filas[min] = 0;
-                    min = get_min(filas);
-                }
-                fill(min, grupos[c], c);
-                filas[min] -= grupos[c];
-            }
-        }
-        c++;
-    }
-    cout << endl;
-    return filas;
+    return asignar_Lima(F,G);
 }
 
 int Concierto::get_complains()
@@ -207,86 +131,6 @@ int Concierto::get_min_usable(vector<int> n, int len) {
         }
     }
     return pos;
-}
-
-
-/*
-int Concierto::find(vector<int> a, int ini, int fin, int key)
-{ //binary search
-    if (ini == fin) {
-        if (a[ini] == key) {
-            return ini;
-        }
-        return -1;
-    }
-    int mid = (fin + ini) / 2;
-    if (key <= mid) {
-        find(a, ini, mid, key);
-    } else {
-        find(a,mid+1,fin,key);
-    }
-    return -2; // to avoid compiler error, theoretically unnecesary
-}
-*/
-void Concierto::custom_sort(int * master, int * slave, int ini, int fin)
-{ //merge sort on master & slave, taking master's value as reference
-    if (ini != fin) {
-        int mid = (ini + fin) / 2;
-        custom_sort(master, slave, ini, mid);
-        custom_sort(master, slave, mid+1, fin);
-        master = merge(master, ini, mid, mid+1, fin);
-        slave = merge(slave, ini, mid, mid+1, fin);
-    }
-}
-
-int* Concierto::merge(int * a, int inia, int fina, int inib,  int finb)
-{
-    int n = (fina - inia) + (finb - inib);
-    int* sol = (int*) malloc(n*sizeof(int));
-    
-    int c = 0;
-    int i = inia;
-    int j = inib;
-    
-    while ((i <= fina) && (j <= finb)) {
-        if (a[i] >= a[j]) {
-            sol[c] = a[i];
-            i++;
-        } else {
-            sol[c] = a[j];
-            j++;
-        }
-        c++;
-    }
-    
-    if (i < fina) {
-        while (i <= fina) {
-            sol[c] = a[i];
-            i++;
-            c++;
-        }
-    }else if (j < finb) {
-        while (j <= finb) {
-            sol[c] = a[j];
-            j++;
-            c++;
-        }
-    }
-    
-    /*
-    cout << "sol" << endl;
-    
-    for (int i = 0; i < n ; i++) {
-        cout << sol[i];
-    }
-    cout << endl;
-    */
-    return sol;
-}
-
-void Concierto::sort_test(int * master, int * slave)
-{
-    custom_sort(master, slave, 0, 9);
 }
 
 void Concierto::print()

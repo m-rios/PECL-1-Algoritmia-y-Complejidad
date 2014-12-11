@@ -26,13 +26,9 @@ int main(int argc, const char * argv[]) {
     
     Concierto concierto = file.get_concierto();
 
-    vector<int> sol = concierto.asignar_Lima_B();
-    for (int i = 0; i < sol.size(); i++) {
-        cout << "[" << sol[i] << "]";
-    }
-    cout << endl;
+    int quejas = concierto.asignar_Lima();
     concierto.printButacas();
-    cout << endl << "complains: " << concierto.get_complains() << endl;
+    cout << endl << "complains: " << quejas << endl;
     
     return 0;
 }

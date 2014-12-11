@@ -27,25 +27,18 @@ private:
     vector<int> F, G;
     vector<Row> B;
     
-    
-    
-    void custom_sort(int * master, int * slave, int ini, int fin);
     int get_max(vector<int> n);
     int get_min(vector<int> n);
     int get_min_usable(vector<int> n, int len);
     bool fill(int nfila, int npersonas, int id);
+    int asignar_Lima(vector<int> filas, vector<int> grupos);
     
     
 public:
     int* merge(int * a, int inia, int fina, int inib,  int finb);
     Concierto(int N, int P, int Q, vector<int> F, vector<int> G);
-    vector<int> asignar_Lima();
-    vector<int> asignar_Lima_B();
-    vector<int> asignar_Lima_A();
-    vector<int> asignar_Lima_C();
+    int asignar_Lima();
     void print();
-    //int find(vector<int>, int ini, int fin, int key);
-    void sort_test(int* master, int* slave);
     int get_complains();
     void printButacas();
     ~Concierto();
