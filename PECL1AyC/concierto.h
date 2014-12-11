@@ -32,12 +32,13 @@ private:
     int get_min_usable(vector<int> n, int len);
     bool fill(int nfila, int npersonas, int id);
     int asignar_Lima(vector<int> filas, vector<int> grupos);
-    
+    int asignar_Lima_Verbose(vector<int> filas, vector<int> grupos);
+    void print_status(bool found, int row, int grp_size, int nfree, bool fragmented);
     
 public:
     int* merge(int * a, int inia, int fina, int inib,  int finb);
     Concierto(int N, int P, int Q, vector<int> F, vector<int> G);
-    int asignar_Lima();
+    int asignar_Lima(bool verbose);
     void print();
     int get_complains();
     void printButacas();

@@ -58,9 +58,77 @@ int Concierto::asignar_Lima(vector<int> filas, vector<int> grupos)
     return complains;
 }
 
-int Concierto::asignar_Lima()
+int Concierto::asignar_Lima_Verbose(vector<int> filas, vector<int> grupos)
 {
-    return asignar_Lima(F,G);
+    int pos;
+    for (int c = 0; c < Q; c++) {
+        //buscar hueco del tamaño del grupo
+        cout << "iteración " << c << endl;
+        pos = find(filas.begin(), filas.end(), grupos[c]) - filas.begin();
+        if (pos < filas.size()) {           //hueco encontrado
+            cout << "Hueco encontrado! Sentando " << grupos[c] << " personas en la fila " << pos << endl;
+            filas[pos] -=grupos[c];
+            fill(pos, grupos[c], c);
+        } else {                            //hueco no encontrado
+            //Hueco no encontrado, buscando la fila con más huecos libres
+            int max = get_max(filas);
+            cout << "Hueco no encontrado, la fila con más huecos libres es la fila " << max << endl;
+            if (grupos[c] < filas[max]) {   //grupo cabe en fila
+                //el grupo cabe entero en la fila, sentando n personas en la fila
+                //f con h huecos libres
+                cout << "El grupo cabe en la fila, sentando " << grupos[c] << " personas en la fila " << max << endl;
+                filas[max] -= grupos[c];
+                fill(max, grupos[c], c);
+            } else {                        //no cabe, hay q fragmentar
+                //el grupo no cabe entero en la fila
+                cout << "El grupo no cabe entero en la fila, hay que fragmentar" << endl;
+                complains+=grupos[c];
+                //buscando la fila con menos huecos
+                int min = get_min(filas);
+                while (grupos[c] > filas[min]) {
+                    cout << "La fila con menos huecos libres es " << min << endl;
+                    grupos[c] -= filas[min];
+                    fill(min, filas[min], c);
+                    cout << "Sentando " << filas[min] << " personas" << endl;
+                    filas[min] = 0;
+                    min = get_min(filas);
+                }
+                cout << "El subgrupo ya cabe entero en alguna fila, buscando la que más libre está" << endl;
+                max = get_max(filas);
+                fill(max, grupos[c], c);
+                cout << "Sentando " << grupos[c] << " personas en la fila " << max << endl;
+                filas[max] -= grupos[c];
+            }
+        }
+    }
+    return complains;
+}
+
+void print_status(bool found, int row, int grp_size, int nfree, bool fragmented)
+{
+    if (found) {
+        cout << "Hueco encontrado!,";
+    }else{
+        cout << "No hay hueco exacto,";
+    }
+    cout << "sentando " << grp_size << "personas ";
+    if (!fragmented) {
+        cout << "en la fila " << row << "con " << nfree << "butacas libres ";
+    }else{
+        
+    }
+
+    
+}
+
+int Concierto::asignar_Lima(bool verbose)
+{
+    if (verbose) {
+        return asignar_Lima_Verbose(F, G);
+    }else{
+        return asignar_Lima(F,G);        
+    }
+
 }
 
 int Concierto::get_complains()

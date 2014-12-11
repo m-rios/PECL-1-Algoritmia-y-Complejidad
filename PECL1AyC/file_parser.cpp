@@ -18,6 +18,7 @@ Parser::Parser(const char* path)
         while (getline(file,tmp)) {
             content.push_back(tmp);
         }
+        file.close();
         N = stoi(content[0]);
         int posf = find(content.begin(), content.end(), "// Filas") - content.begin();
         P = stoi(content[posf+1]);
@@ -29,10 +30,7 @@ Parser::Parser(const char* path)
         for (int i = posg + 2; i < content.size(); i++) {
             G.push_back(stoi(content[i]));
         }
-    }
-    else
-        cout << "could not open file" << endl;
-    
+    }    
 }
 
 Concierto Parser::get_concierto()

@@ -59,7 +59,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-t /Users/Mario/GitHub/PECL1AyC/PECL1AyC/test.txt"
+            argument = "-v /Users/Mario/GitHub/PECL1AyC/PECL1AyC/test.txt"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
